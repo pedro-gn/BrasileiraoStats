@@ -1,0 +1,80 @@
+body {
+}
+
+/*====================Top==========*/
+.team-container{
+    display: flex;
+}
+.logo-container {
+    background-color: #1f1f1f !important;
+    width: 170px;
+    height: 170px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-container {
+    background-color: #121212 !important;
+    padding: 30px !important;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.info-element {
+    width: 100px; 
+    padding: 10px;  
+    border-radius: 5px;
+}
+
+.info-label {
+    font-size: 14px;
+    color: #A7A7A7;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.info-value {
+    font-size: 16px;
+    border: 2px solid #4361ee; 
+    color: white;
+    padding: 10px;
+    background-color: #121212;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px; /* Espaço entre os elementos */
+}
+
+.info-element {
+    flex-basis: calc(33.3333% - 20px); 
+}
+
+
+
+/*==================== Recentes ================================*/
+.match-container{
+    background-color: #121212;
+    border-radius: 20px !important;
+
+}
+.match-title-container{
+    display: flex;
+    align-items: center;
+
+}
+
+
+/*==================== Jogadores ================================*/
+.player-container{
+    background-color: #121212;
+    border-radius: 20px !important;
+}

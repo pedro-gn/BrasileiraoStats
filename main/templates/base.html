@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BrasileirãoStats{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/time.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/jogador.css' %}">
+
+    <!--   BOOTSTRAP CSS  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+        crossorigin="anonymous">
+    </script>
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+        crossorigin="anonymous"
+    >
+    
+</head>
+<body>
+  <!--======================================================================    NAVBAR    =========================================================================================================================-->
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #198754;">
+    <div class="container">
+        <!-- Logo -->
+        <a style="font-size: 25px;" class="navbar-brand" href="/">
+            <img src={% static "main/svg/logo.svg" %} alt="Logo" width="50" height="50"> <!-- Ajuste o caminho e as dimensões conforme necessário -->
+            BrasileirãoStats
+        </a>
+
+        <!-- Botão do menu colapsável -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menu colapsável -->
+        <div class="collapse navbar-collapse justify-content-center " id="navbarNav">
+            <ul class="navbar-nav gap-4 ">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/times">Times</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Jogadores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Partidas</a>
+                </li>
+                <li class="nav-item dropdown custom-dropdown ">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ campeonato_selecionado|default:"Campeonatos" }}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item {% if campeonato_selecionado == 'Brasileirão 2023' %}active{% endif %}" href="#">Brasileirão 2023</a></li>
+                        <li><a class="dropdown-item {% if campeonato_selecionado == 'Brasileirão 2022' %}active{% endif %}" href="#">Brasileirão 2022</a></li>
+                        <li><a class="dropdown-item {% if campeonato_selecionado == 'Brasileirão 2021' %}active{% endif %}" href="#">Brasileirão 2021</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+  <!--==============================================        CONTENT        ====================================================-->
+  {% block content %}
+
+  {% endblock %}
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+</body>
+</html>

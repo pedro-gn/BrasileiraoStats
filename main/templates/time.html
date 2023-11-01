@@ -1,0 +1,155 @@
+{% extends  "base.html" %} {% load static %} {% block content %}
+
+<div class="container mt-5 fs-6 mb-4">
+
+    <div class="container top-container">
+        <div class="team-container">
+            <div class="logo-container ">
+                <img src="{{ time.escudo.url }}" alt="{{ time.nome }} Escudo" width="130" height="130">
+            </div>
+            <h1 class="ms-4">{{time.nome}}</h1>
+        </div>
+
+        <div class="grid-container">
+ 
+            <div class="info-element">
+                <p class="info-label">Técnico</p>
+                <div class="info-value">
+                    {{time.tecnico}}
+                </div>
+            </div>  
+
+            <div class="info-element">
+                <p class="info-label">Número de Jogadores</p>
+                <div class="info-value">
+                    {{numero_de_jogadores}}
+                </div>
+            </div> 
+            
+            <div class="info-element">
+                <p class="info-label">Média de idade</p>
+                <div class="info-value">
+                    {{media_idade_anos}}
+                </div>
+            </div> 
+
+            <div class="info-element">
+                <p class="info-label">Estádio</p>
+                <div class="info-value">
+                    {{time.estadio}}
+                </div>
+            </div> 
+
+            <div class="info-element">
+                <p class="info-label">Total de Partidas</p>
+                <div class="info-value">
+                    {{numero_de_partidas}}
+                </div>
+            </div> 
+
+            <div class="info-element">
+                <p class="info-label">Técnico</p>
+                <div class="info-value">
+                    Zé Ricardo
+                </div>
+            </div> 
+        </div> <!-- fim info time -->
+
+    </div> <!-- fim conteiner top -->
+
+
+    <div class="container mt-4">
+        <div class="row">
+            
+            <div class="col me-4 list-group  match-container pe-0 pb-3">
+                <div class="container match-title-container p-3 pb-0 pt-0 ">
+                    <img class="me-1 ms-1" src={% static "main/images/recentes.png" %} alt="Logo" width="35" height="35">
+                    <h4 class="table-title">Últimas Partidas</h4>
+                </div>
+                {% for partida in ultimas_partidas %}
+                <div class="latest-match-list-item p-4 pt-3 pb-3">
+                    <!-- Data e Hora -->
+                    <div style="font-size: 15px;" class="date-div"> 
+                        <div>{{ partida.data|time:"H:i" }}</div>
+                        <div>{{ partida.data|date:"d/m" }}</div>
+                    </div>
+                
+                    <div style="display: flex; justify-content: center; align-items: center; font-size: 25px;">
+                        <!-- Time Mandante -->
+                        <div style="width: 170px; text-align: right; font-size: 15px; display: flex; align-items: center; justify-content: flex-end;">
+                            {{ partida.time_mandante.nome }}
+                            <div class="team-logo-container me-3 ms-3">
+                                <a href="{% url 'time_detail' nome_time=partida.time_mandante.nome %}">
+                                    <img src="{{ partida.time_mandante.escudo.url }}" alt="{{ partida.time_mandante.nome }} Escudo" width="30" height="30">
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Placar -->
+                        {% if partida.gols_mandante > partida.gols_visitante and time.pk == partida.time_mandante.pk %}
+                        <div style="flex: 0; font-size: 20px; white-space: nowrap; color: green;">
+                        {% elif partida.gols_mandante < partida.gols_visitante and time.pk == partida.time_mandante.pk %}
+                            <div style="flex: 0; font-size: 20px; white-space: nowrap; color: #b50f0f;">
+                        {% elif partida.gols_mandante < partida.gols_visitante and time.pk == partida.time_visitante.pk %}
+                            <div style="flex: 0; font-size: 20px; white-space: nowrap; color: green;">
+                        {% elif partida.gols_mandante > partida.gols_visitante and time.pk == partida.time_visitante.pk %}
+                            <div style="flex: 0; font-size: 20px; white-space: nowrap; color: #b50f0f;">
+                        {% else %}
+                            <div style="flex: 0; font-size: 20px; white-space: nowrap; color: #2366c9;">
+                        {% endif %}
+                            {{partida.gols_mandante}} : {{partida.gols_visitante}}
+                        </div>
+                        
+                        <!-- Time Visitante -->
+                        <div style="width: 170px; text-align: left; font-size: 15px; display: flex; align-items: center;">
+                            <div class="team-logo-container ms-3 me-3">
+                                <a href="{% url 'time_detail' nome_time=partida.time_visitante.nome %}">
+                                    <img src="{{ partida.time_visitante.escudo.url }}" alt="{{ partida.time_visitante.nome }} Escudo" width="30" height="30">
+                                </a>
+                            </div>
+                            {{ partida.time_visitante.nome }}
+                        </div>
+                    </div>
+                    
+                    <button style="" type="button" class="btn stat-btn"><img class="" src={% static "main/images/stats.png" %} alt="Logo" width="25" height="25"></button>
+                </div>
+                {% endfor %}
+            </div> <!-- Final primeira coluna-->
+
+
+            <div class="col player-container">
+                <table class="table table-striped table-hover w-100">
+                    <thead class="text-center">
+                        <tr>
+                        <th scope="col">Nº</th>
+                        <th scope="col">Jogador</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Gols</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center" >
+                    {% for jogador in jogadores%}
+                    <tr>
+                        <th style="" scope="row">{{ jogador.n_camisa }}</th>
+                        <td><a href="{% url 'jogador_detail' jogador_id=jogador.pk %}">{{ jogador.nome }}</a></td>
+                        <td>                                
+                            <div class="team-logo-container me-3 ms-3">
+                                <a href="{% url 'time_detail' nome_time=jogador.time.nome %}">
+                                    <img src="{{ jogador.time.escudo.url }}" alt="{{ jogador.time.nome }} Escudo" width="30" height="30">
+                                </a>
+                            </div>
+                        </td>
+                        <td>{{jogador.gols_feitos.count}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>  
+                </table>
+            </div>
+        </div>
+    </div>
+    
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,185 @@
+{% extends  "base.html" %} {% load static %} {% block content %}
+
+<div class="container mt-5 fs-6 mb-4">
+
+    <div class="container top-container">
+        <div class="team-container">
+            <div class="logo-container ">
+                <img src={% static "main/images/avatarjogador.png" %} alt="{{ jogador.time.nome }} Escudo" width="130" height="130">
+            </div>
+            <h1 class="ms-4">{{jogador.nome}}</h1>
+        </div>
+
+        <div class="grid-container">
+ 
+            <div class="info-element">
+                <p class="info-label">Numero de Partidas</p>
+                <div class="info-value">
+                    {{numero_de_partidas}}
+                </div>
+            </div>  
+
+            <div class="info-element">
+                <p class="info-label">Pé</p>
+                <div class="info-value">
+                    {{jogador.pe}}
+                </div>
+            </div> 
+            
+            <div class="info-element">
+                <p class="info-label">Altura</p>
+                <div class="info-value">
+                    {{jogador.altura}}
+                </div>
+            </div> 
+
+            <div class="info-element">
+                <p class="info-label">Data de Nascimento</p>
+                <div class="info-value">
+                    {{jogador.data_nascimento|date:"d/m/Y"}} ({{idade_anos}})
+                </div>
+            </div> 
+
+            <div class="info-element">
+                <p class="info-label">Posição</p>
+                <div class="info-value">
+                    {{jogador.posicao}}
+                </div>
+            </div> 
+
+            <div class="info-element">
+                <p class="info-label">Clube</p>
+                <div class="info-value">
+                    {{jogador.time.nome }} <img src={{ jogador.time.escudo.url }} alt="{{ jogador.time.nome }} Escudo" width="20" height="20">
+                </div>
+            </div> 
+        </div> <!-- fim info time -->
+
+    </div> <!-- fim conteiner top -->
+
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-7 list-group  match-container pe-3 pb-3">
+                <div class="container match-title-container p-3 pb-0 pt-0 ">
+                    <img class="me-1 ms-1" src={% static "main/images/recentes.png" %} alt="Logo" width="35" height="35">
+                    <h4 class="table-title">Últimas Partidas</h4>
+                </div>
+                {% for partida in ultimas_partidas %}
+                <div class="latest-match-list-item p-4 pt-3 pb-3">
+                    <!-- Data e Hora -->
+                    <div style="font-size: 15px;" class="date-div"> 
+                        <div>{{ partida.partida.data|time:"H:i" }}</div>
+                        <div>{{ partida.partida.data|date:"d/m" }}</div>
+                    </div>
+                
+                    <div style="display: flex; justify-content: center; align-items: center; font-size: 25px;">
+                        <!-- Time Mandante -->
+                        <div style="width: 170px; text-align: right; font-size: 15px; display: flex; align-items: center; justify-content: flex-end;">
+                            {{ partida.partida.time_mandante.nome }}
+                            <div class="team-logo-container me-3 ms-3">
+                                <a href="{% url 'time_detail' nome_time=partida.partida.time_mandante.nome %}">
+                                    <img src="{{ partida.partida.time_mandante.escudo.url }}" alt="{{ partida.partida.time_mandante.nome }} Escudo" width="30" height="30">
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Placar -->
+                        {% if partida.partida.gols_mandante > partida.partida.gols_visitante and time.pk == partida.partida.time_mandante.pk %}
+                        <div style="flex: 0; font-size: 20px; white-space: nowrap; color: green;">
+                        {% elif partida.partida.gols_mandante < partida.partida.gols_visitante and time.pk == partida.partida.time_mandante.pk %}
+                            <div style="flex: 0; font-size: 20px; white-space: nowrap; color: #b50f0f;">
+                        {% elif partida.partida.gols_mandante < partida.partida.gols_visitante and time.pk == partida.partida.time_visitante.pk %}
+                            <div style="flex: 0; font-size: 20px; white-space: nowrap; color: green;">
+                        {% elif partida.partida.gols_mandante > partida.partida.gols_visitante and time.pk == partida.partida.time_visitante.pk %}
+                            <div style="flex: 0; font-size: 20px; white-space: nowrap; color: #b50f0f;">
+                        {% else %}
+                            <div style="flex: 0; font-size: 20px; white-space: nowrap; color: #2366c9;">
+                        {% endif %}
+                            {{partida.partida.gols_mandante}} : {{partida.partida.gols_visitante}}
+                        </div>
+                        
+                        <!-- Time Visitante -->
+                        <div style="width: 170px; text-align: left; font-size: 15px; display: flex; align-items: center;">
+                            <div class="team-logo-container ms-3 me-3">
+                                <a href="{% url 'time_detail' nome_time=partida.partida.time_visitante.nome %}">
+                                    <img src="{{ partida.partida.time_visitante.escudo.url }}" alt="{{ partida.partida.time_visitante.nome }} Escudo" width="30" height="30">
+                                </a>
+                            </div>
+                            {{ partida.partida.time_visitante.nome }}
+                        </div>
+                    </div>
+                    
+                    <button style="" type="button" class="btn stat-btn"><img class="" src={% static "main/images/stats.png" %} alt="Logo" width="25" height="25"></button>
+                </div>
+                {% endfor %}
+            </div> <!-- Final primeira coluna-->
+
+
+            <div class="col-md-5 pe-0 ">
+                <div class="container player-stats-container p-0 ">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-box">
+                                <img class="icon" src={% static "main/images/cartaoA.png" %} alt="Cartao Amarelo">
+                                <div class="label-box">
+                                    <div class="label">Cartões A:</div>
+                                    <div class="number">5</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-box">
+                                <img class="icon" src={% static "main/images/cartaoV.png" %} alt="Cartao Vermelho">
+                                <div class="label-box">
+                                    <div class="label">Cartões V:</div>
+                                    <div class="number">10</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-box">
+                                <img class="icon" src={% static "main/images/chute.png" %} alt="Chute">
+                                <div class="label-box">
+                                    <div class="label">Finalizações:</div>
+                                    <div class="number">8</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-box">
+                                <img class="icon" src={% static "main/images/apito.png" %} alt="Apito">
+                                <div class="label-box">
+                                    <div class="label">Faltas:</div>
+                                    <div class="number">2</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-box">
+                                <img class="icon" src={% static "main/images/passe.png" %} alt="Passe">
+                                <div class="label-box">
+                                    <div class="label">Passes: </div>
+                                    <div class="number">15</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-box">
+                                <img class="icon" src={% static "main/images/bola.png" %} alt="Bola">
+                                <div class="label-box">
+                                    <div class="label">Assistência:</div>
+                                    <div class="number">12</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}

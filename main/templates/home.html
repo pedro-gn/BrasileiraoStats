@@ -1,0 +1,141 @@
+{% extends  "base.html" %} {% load static %} {% block content %}
+
+<div class="container mt-5 fs-6 mb-4">
+    <div class="row">
+      <!-- Primeira coluna -->
+        <div class="col-md-7 p-4 table-responsive table-container">
+            <div style="background-color: #121212 !important;"class="container  table-title-container d-flex align-items-center">
+                <img class="m-3" src={% static "main/svg/campeonato_brasileiro.svg" %} alt="Logo" width="60" height="60">
+                <h4 class ="table-title mb-0">Brasileirão Série A - Classificação </h4>
+            </div>  
+            <table class="table table-striped table-hover">
+            <thead class="text-center">
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Time</th>
+                <th scope="col">Pontos</th>
+                <th scope="col">Jogos</th>
+                <th scope="col">V</th>
+                <th scope="col">E</th>
+                <th scope="col">D</th>
+                <th scope="col">GP</th>
+                <th scope="col">GC</th>
+                <th scope="col">SG</th>
+                </tr>
+            </thead>
+            <tbody class="text-center" >
+            {% for time in times %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td class="">
+                    <div class="d-flex align-items-center">
+                        <div class="team-logo-container me-3">
+                            <a href="{% url 'time_detail' nome_time=time.nome %}">
+                                <img src="{{ time.escudo.url }}" alt="{{ time.nome }} Escudo" width="30" height="30">
+                            </a>
+                        </div> 
+                        <span>{{time.nome}}</span>
+                    </div>
+                </td>
+                <td><div style="background-color: #6d6d6d; width: 70%; border-radius: 5px; display: block; margin-left: auto; margin-right: auto;">{{time.pontuacao}}</div></td>
+                <td>{{time.jogos}}</td>
+                <td style="color: green !important;">{{time.vitorias}}</td>
+                <td style="color: #2366c9 !important;">{{time.empates}}</td>
+                <td style="color: #b50f0f !important;">{{time.derrotas}}</td>
+                <td>{{time.gols_m}}</td>
+                <td>{{time.gols_s}}</td>
+                <td>{{time.saldo_gols}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>  
+        </table>
+    </div>
+      <!-- Segunda coluna -->
+      
+      <div class="col-md-5">
+        <!-- Primeira linha da segunda coluna -->
+        <div class="p-4 mb-5 table-container table-responsive">
+            <div style="background-color: #121212 !important;" class="container  table-title-container">
+                <img class="me-1 ms-1" src={% static "main/images/gol.png" %} alt="Logo" width="35" height="35">
+                <h4 class ="table-title">Artilheiros</h4>
+            </div>
+            <table class="table table-striped table-hover w-100">
+                <thead class="text-center">
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Jogador</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Gols</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center" >
+                {% for jogador in jogadores_com_gols %}
+                <tr>
+                    <th style="" scope="row">{{ forloop.counter }}º</th>
+                    <td><a href="{% url 'jogador_detail' jogador_id=jogador.pk %}">{{ jogador.nome }}</a></td>
+                    <td>                                
+                        <div class="team-logo-container me-3 ms-3">
+                            <a href="{% url 'time_detail' nome_time=jogador.time.nome %}">
+                                <img src="{{ jogador.time.escudo.url }}" alt="{{ jogador.time.nome }} Escudo" width="30" height="30">
+                            </a>
+                        </div>
+                    </td>
+                    <td>{{jogador.gols_feitos.count}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>  
+            </table>
+        </div> <!--Fim primeira linha-->
+        <!-- Segunda linha da segunda coluna -->
+        <div style="background-color: #121212 !important;" class="p-4 table-container table-responsive">
+            <div style="background-color: #121212 !important;" class="container  table-title-container">
+                <img class="me-1 ms-1" src={% static "main/images/recentes.png" %} alt="Logo" width="35" height="35">
+                <h4 class ="table-title">Últimas Partidas</h4>
+            </div>
+
+            <div class="list-group latest-match-list">
+                {% for partida in ultimas_partidas %}
+                <div class="latest-match-list-item">
+                    <!-- Data e Hora -->
+                    <div style="font-size: 15px;" class="date-div"> 
+                        <div>{{ partida.data|time:"H:i" }}</div>
+                        <div>{{ partida.data|date:"d/m" }}</div>
+                    </div>
+                
+                    <div style="display: flex; justify-content: center; align-items: center; font-size: 25px;">
+                        <!-- Time Mandante -->
+                        <div style="width: 170px; text-align: right; font-size: 15px; display: flex; align-items: center; justify-content: flex-end;">
+                            {{ partida.time_mandante.nome }}
+                            <div class="team-logo-container me-3 ms-3">
+                                <a href="{% url 'time_detail' nome_time=partida.time_mandante.nome %}">
+                                    <img src="{{ partida.time_mandante.escudo.url }}" alt="{{ partida.time_mandante.nome }} Escudo" width="30" height="30">
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Placar -->
+                        <div style="flex: 0; font-size: 20px; white-space: nowrap;">
+                            {{partida.gols_mandante}} : {{partida.gols_visitante}}
+                        </div>
+                        
+                        <!-- Time Visitante -->
+                        <div style="width: 170px; text-align: left; font-size: 15px; display: flex; align-items: center;">
+                            <div class="team-logo-container ms-3 me-3">
+                                <a href="{% url 'time_detail' nome_time=partida.time_visitante.nome %}">
+                                    <img src="{{ partida.time_visitante.escudo.url }}" alt="{{ partida.time_visitante.nome }} Escudo" width="30" height="30">
+                                </a>
+                            </div>
+                            {{ partida.time_visitante.nome }}
+                        </div>
+                    </div>
+                    
+                    <button style="" type="button" class="btn stat-btn"><img class="" src={% static "main/images/stats.png" %} alt="Logo" width="25" height="25"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div> <!--Fim segunda linha-->
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}

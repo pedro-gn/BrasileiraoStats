@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap');
+:root {
+    --bs-body-font-family: 'Inter', sans-serif !important; 
+}
+body {
+    /* text-transform: uppercase; */
+    background-color: #0a090a !important;
+    color: #ffffff !important;
+}
+
+nav {
+    background-color: #121212 !important;
+}
+
+.custom-dropdown .dropdown-menu {
+    background-color: #121212 !important;
+    color: white !important;
+    border: 2px solid #4361ee; 
+    border-radius: 5px; 
+}
+.custom-dropdown .dropdown-menu .dropdown-item.active {
+    background-color: #4361ee; 
+}
+
+.custom-dropdown .dropdown-menu .dropdown-item {
+    color: whitesmoke !important;
+    opacity: 100%; 
+}
+
+.custom-dropdown .nav-link.dropdown-toggle {
+    border: 2px solid #4361ee;
+    border-radius: 5px;
+    padding: 5px 10px;
+}

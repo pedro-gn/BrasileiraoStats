@@ -1,0 +1,91 @@
+.table {
+    background-color: transparent !important;
+    color: #f4fdff !important;
+    vertical-align: middle !important;
+}
+td {
+    background-color: transparent !important;
+    color: #f4fdff !important;
+}
+th {
+    background-color: transparent !important;
+    color: #f4fdff !important;
+}
+
+.table-container {
+    background-color: #121212 !important;
+    border-radius: 20px;
+}
+
+.table-title-container {
+    background-color: #1f1f1f;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    margin-left: -24px !important; /* negative left margin equal to parent padding */
+    margin-right: -24px !important;  /* negative right margin equal to parent padding */
+    margin-top: -24px !important;
+    width: calc(100% + 48px) !important; /* width increased by twice the parent padding */
+}
+.table-title {
+    color: #f4fdff !important;
+    padding: 20px 50px 20px 10px;
+    margin: 0px;
+}
+
+.team-logo-container {
+    display: inline-flex !important;
+    background: #1f1f1f; 
+    padding: 5px;    
+    width: 45px;
+    height: 45px;     
+    border-radius: 18px;   
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+}
+.team-logo-container a {
+    text-decoration: none;  /* remove o sublinhado */
+    color: inherit;         /* faz com que o link herde a cor do texto do elemento pai */
+    padding: 0px !important;
+    background-color: transparent !important;
+}
+
+
+
+/*==================================================Partidas Recentes=================================== */
+.latest-match-list{
+    margin-left: -24px !important; 
+    margin-right: -24px !important;  
+    width: calc(100% + 48px) !important;
+    margin-bottom: -24px !important;
+}
+.latest-match-list-item {
+    color: #f4fdff !important;
+    background-color: #121212;
+    border: 0px;
+    border-bottom: 1px !important;
+    padding: 20px;
+    display: inline-flex;   
+    justify-content: space-between;
+    vertical-align: middle;
+    align-items: center;
+}
+.latest-match-list-item a div {
+    color: #f4fdff !important;
+    display: inline-flex;
+    align-items: center;
+    
+}
+.latest-match-list-item a .date-div  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-btn {
+    background-color: #4361ee !important;
+}
+.stat-btn :hover {
+    
+}
