@@ -32,7 +32,7 @@
                     <div class="d-flex align-items-center">
                         <div class="team-logo-container me-3">
                             <a href="{% url 'time_detail' nome_time=time.nome %}">
-                                <img src="{{ time.escudo.url }}" alt="{{ time.nome }} Escudo" width="30" height="30">
+                                <img src="{{ time.escudo }}" alt="{{ time.nome }} Escudo" width="30" height="30">
                             </a>
                         </div> 
                         <span>{{time.nome}}</span>

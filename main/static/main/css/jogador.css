@@ -1,10 +1,12 @@
+.bottom-container {
+    flex-direction: row !important;
+}
+
 .player-stats-container {
     background-color: #121212 !important;
     border-radius: 20px;
+    width: 100% !important;
 }
-
-
-
 
 .info-box {
     background-color: #1f1f1f !important;
@@ -17,15 +19,16 @@
 
 .label-box {
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
 .icon {
-    width: 60px; /* Largura do ícone */
-    height: 60px; /* Altura do ícone */
-    margin-right: 20px;
+    width: 40px; /* Largura do ícone */
+    height: 40px; /* Altura do ícone */
+    margin-right: 10px;
 }
 
 .label {
@@ -35,4 +38,19 @@
 
 .number {
     font-size: 24px; /* Tamanho da fonte do número */
+}
+
+@media (max-width: 1200px){
+    .bottom-container {
+        flex-direction: column !important;
+        width: 100%;
+    }
+    .match-container {
+        width: 100% !important;
+    }
+
+    .player-stats-row {
+        padding-left: 0px !important;
+        width: 100% !important;
+    }
 }

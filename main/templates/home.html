@@ -1,9 +1,9 @@
 {% extends  "base.html" %} {% load static %} {% block content %}
 
 <div class="container mt-5 fs-6 mb-4">
-    <div class="row">
+    <div class="row home-row">
       <!-- Primeira coluna -->
-        <div class="col-md-7 p-4 table-responsive table-container">
+        <div class="col-md-7 p-4 table-responsive table-container classification-table">
             <div style="background-color: #121212 !important;"class="container  table-title-container d-flex align-items-center">
                 <img class="m-3" src={% static "main/svg/campeonato_brasileiro.svg" %} alt="Logo" width="60" height="60">
                 <h4 class ="table-title mb-0">Brasileirão Série A - Classificação </h4>
@@ -31,7 +31,7 @@
                     <div class="d-flex align-items-center">
                         <div class="team-logo-container me-3">
                             <a href="{% url 'time_detail' nome_time=time.nome %}">
-                                <img src="{{ time.escudo.url }}" alt="{{ time.nome }} Escudo" width="30" height="30">
+                                <img src="{{ time.escudo }}" alt="{{ time.nome }} Escudo" width="30" height="30">
                             </a>
                         </div> 
                         <span>{{time.nome}}</span>
@@ -52,7 +52,7 @@
     </div>
       <!-- Segunda coluna -->
       
-      <div class="col-md-5">
+      <div class="col-md-5 home-bottom-container ">
         <!-- Primeira linha da segunda coluna -->
         <div class="p-4 mb-5 table-container table-responsive">
             <div style="background-color: #121212 !important;" class="container  table-title-container">
@@ -76,7 +76,7 @@
                     <td>                                
                         <div class="team-logo-container me-3 ms-3">
                             <a href="{% url 'time_detail' nome_time=jogador.time.nome %}">
-                                <img src="{{ jogador.time.escudo.url }}" alt="{{ jogador.time.nome }} Escudo" width="30" height="30">
+                                <img src="{{ jogador.time.escudo }}" alt="{{ jogador.time.nome }} Escudo" width="30" height="30">
                             </a>
                         </div>
                     </td>
@@ -108,7 +108,7 @@
                             {{ partida.time_mandante.nome }}
                             <div class="team-logo-container me-3 ms-3">
                                 <a href="{% url 'time_detail' nome_time=partida.time_mandante.nome %}">
-                                    <img src="{{ partida.time_mandante.escudo.url }}" alt="{{ partida.time_mandante.nome }} Escudo" width="30" height="30">
+                                    <img src="{{ partida.time_mandante.escudo }}" alt="{{ partida.time_mandante.nome }} Escudo" width="30" height="30">
                                 </a>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                         <div style="width: 170px; text-align: left; font-size: 15px; display: flex; align-items: center;">
                             <div class="team-logo-container ms-3 me-3">
                                 <a href="{% url 'time_detail' nome_time=partida.time_visitante.nome %}">
-                                    <img src="{{ partida.time_visitante.escudo.url }}" alt="{{ partida.time_visitante.nome }} Escudo" width="30" height="30">
+                                    <img src="{{ partida.time_visitante.escudo }}" alt="{{ partida.time_visitante.nome }} Escudo" width="30" height="30">
                                 </a>
                             </div>
                             {{ partida.time_visitante.nome }}

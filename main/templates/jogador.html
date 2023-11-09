@@ -50,7 +50,7 @@
             <div class="info-element">
                 <p class="info-label">Clube</p>
                 <div class="info-value">
-                    {{jogador.time.nome }} <img src={{ jogador.time.escudo.url }} alt="{{ jogador.time.nome }} Escudo" width="20" height="20">
+                    {{jogador.time.nome }} <img src={{ jogador.time.escudo }} alt="{{ jogador.time.nome }} Escudo" width="20" height="20">
                 </div>
             </div> 
         </div> <!-- fim info time -->
@@ -59,8 +59,8 @@
 
 
     <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-7 list-group  match-container pe-3 pb-3">
+        <div class="row bottom-container">
+            <div class="col-md-7 list-group  match-container mb-4 pe-3 pb-3">
                 <div class="container match-title-container p-3 pb-0 pt-0 ">
                     <img class="me-1 ms-1" src={% static "main/images/recentes.png" %} alt="Logo" width="35" height="35">
                     <h4 class="table-title">Últimas Partidas</h4>
@@ -79,7 +79,7 @@
                             {{ partida.partida.time_mandante.nome }}
                             <div class="team-logo-container me-3 ms-3">
                                 <a href="{% url 'time_detail' nome_time=partida.partida.time_mandante.nome %}">
-                                    <img src="{{ partida.partida.time_mandante.escudo.url }}" alt="{{ partida.partida.time_mandante.nome }} Escudo" width="30" height="30">
+                                    <img src="{{ partida.partida.time_mandante.escudo }}" alt="{{ partida.partida.time_mandante.nome }} Escudo" width="30" height="30">
                                 </a>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                         <div style="width: 170px; text-align: left; font-size: 15px; display: flex; align-items: center;">
                             <div class="team-logo-container ms-3 me-3">
                                 <a href="{% url 'time_detail' nome_time=partida.partida.time_visitante.nome %}">
-                                    <img src="{{ partida.partida.time_visitante.escudo.url }}" alt="{{ partida.partida.time_visitante.nome }} Escudo" width="30" height="30">
+                                    <img src="{{ partida.partida.time_visitante.escudo }}" alt="{{ partida.partida.time_visitante.nome }} Escudo" width="30" height="30">
                                 </a>
                             </div>
                             {{ partida.partida.time_visitante.nome }}
@@ -116,7 +116,7 @@
             </div> <!-- Final primeira coluna-->
 
 
-            <div class="col-md-5 pe-0 ">
+            <div  class="col-md-5 mb-4 pe-0  player-stats-row">
                 <div class="container player-stats-container p-0 ">
                     <div class="row">
                         <div class="col-md-6">
@@ -124,7 +124,7 @@
                                 <img class="icon" src={% static "main/images/cartaoA.png" %} alt="Cartao Amarelo">
                                 <div class="label-box">
                                     <div class="label">Cartões A:</div>
-                                    <div class="number">5</div>
+                                    <div class="number">{{jogador.cartoes_a}}</div>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
                                 <img class="icon" src={% static "main/images/cartaoV.png" %} alt="Cartao Vermelho">
                                 <div class="label-box">
                                     <div class="label">Cartões V:</div>
-                                    <div class="number">10</div>
+                                    <div class="number">{{jogador.cartoes_v}}</div>
                                 </div>
                             </div>
                         </div>

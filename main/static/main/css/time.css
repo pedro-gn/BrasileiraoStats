@@ -56,6 +56,7 @@ body {
 
 .info-element {
     flex-basis: calc(33.3333% - 20px); 
+    align-items: center !important;
 }
 
 
@@ -64,6 +65,7 @@ body {
 .match-container{
     background-color: #121212;
     border-radius: 20px !important;
+    margin-right: 24px;
 
 }
 .match-title-container{
@@ -77,4 +79,34 @@ body {
 .player-container{
     background-color: #121212;
     border-radius: 20px !important;
+}
+
+
+
+
+
+@media (max-width: 1200px) {
+    .top-container {
+      display: flex;
+      flex-direction: column !important;
+      align-items: center;
+      text-align: center;
+    }
+
+    .team-container{
+        width: 100%;
+        display: flex;
+        justify-content: center !important;
+    }
+    .grid-container{
+        margin-top: 25px;
+    }
+
+    .match-container {
+        margin-right: 0px !important;
+    }
+
+    .team-bottom-row {
+        flex-direction: column !important;
+    }
 }

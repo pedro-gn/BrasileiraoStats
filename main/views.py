@@ -21,7 +21,14 @@ def home(request):
 
     return render(request, "home.html", context)
 
-
+def jogadores(request):
+    jogadores_por_pagina = 20
+    todos_jogadores = Jogador.objects.all()
+    
+    context = {
+        "jogadores" : todos_jogadores
+    }
+    return render(request, 'pagina_jogadores.html', context)
 
 def times(request):
     times = Time.objects.annotate(

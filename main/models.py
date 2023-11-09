@@ -11,7 +11,8 @@ class Time(models.Model):
     gols_s = models.IntegerField()
     gols_m = models.IntegerField()
     estadio = models.CharField(max_length=50)
-    escudo = models.ImageField(upload_to='escudos/')
+    escudo = models.CharField(max_length=255)
+    sigla = models.CharField(max_length=10)
     
     #Atributos derivados
     @property
@@ -32,13 +33,15 @@ class Time(models.Model):
     
 class Jogador(models.Model):
     nome = models.CharField(max_length=50)
+    apelido = models.CharField(max_length=50)
     posicao = models.CharField(max_length=50)
     n_camisa = models.IntegerField()
     cartoes_v = models.IntegerField()
-    cartoes_a = models.IntegerField()
+    cartoes_a = models.IntegerField() 
     pe = models.CharField(max_length=50)
     data_nascimento = models.DateField()
     altura = models.FloatField()
+    foto = models.CharField(max_length=255, default='main/images/avatarjogador.png')
     
     time = models.ForeignKey(Time, on_delete=models.CASCADE)
 
