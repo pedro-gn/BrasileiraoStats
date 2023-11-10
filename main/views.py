@@ -1,14 +1,16 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Time, Jogador, Gol, Partida, Substituicao, JogadorPartida
 from django.db.models import Count, F, ExpressionWrapper, IntegerField, Q, Avg, fields
 from datetime import date
+from .forms import JogadorSearchForm
 
 def home(request):
     times = Time.objects.annotate(
     calculated_pontuacao = ExpressionWrapper(3 * F('vitorias') + F('empates'), output_field=IntegerField())).order_by('-calculated_pontuacao')
     
     # Query que retorna a contagem de gols de cada jogador
-    jogadores_com_gols = Jogador.objects.select_related('time').annotate(num_gols=Count('gols_feitos')).order_by('-num_gols')
+    jogadores_com_gols = Jogador.objects.select_related('time').annotate(num_gols=Count('gols_feitos')).order_by('-num_gols')[:5]
     
     ultimas_partidas = Partida.objects.select_related('time_mandante', 'time_visitante').order_by('-data')[:5]
 
@@ -22,13 +24,37 @@ def home(request):
     return render(request, "home.html", context)
 
 def jogadores(request):
-    jogadores_por_pagina = 20
     todos_jogadores = Jogador.objects.all()
     
+    # Inicializar um novo formulário sem dados se a solicitação não contiver parâmetros de pesquisa
+    form = JogadorSearchForm(request.GET) 
+    if form.is_valid():
+        query = form.cleaned_data['query']
+        todos_jogadores = todos_jogadores.filter(nome__icontains=query)
+        
+    # Paginator dos jogadores
+    jogadores_por_pagina = 20
+    paginator = Paginator(todos_jogadores, jogadores_por_pagina)
+    pagina_atual = request.GET.get('pagina_atual', 1)
+    
+    try:
+        # Obtem a pagina especifica
+        jogadores = paginator.page(pagina_atual)
+    except PageNotAnInteger:
+        # Se a pagina nao for um inteiro, mostra a primeira pagina
+        jogadores = paginator.page(1)
+    except EmptyPage:
+        # Se a pagina for maior que o numero total de paginas, mostra a ultima pagina
+        jogadores = paginator.page(paginator.num_pages)
+    
+    
     context = {
-        "jogadores" : todos_jogadores
+        "jogadores" : jogadores,
+        'form': form
     }
+    
     return render(request, 'pagina_jogadores.html', context)
+
 
 def times(request):
     times = Time.objects.annotate(

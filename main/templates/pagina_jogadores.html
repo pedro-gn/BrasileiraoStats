@@ -2,6 +2,13 @@
 <div class="container mt-5 fs-6 mb-4">
 
     <div class="p-4 mb-5 table-container table-responsive">
+        <form method="get" class="mb-3">
+            {{ form.query.label_tag }}
+            {{ form.query }}
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
+        </form>
+
+
         <div style="background-color: #121212 !important;" class="container  table-title-container">
             <img class="me-1 ms-1" src={% static "main/images/gol.png" %} alt="Logo" width="35" height="35">
             <h4 class ="table-title">Jogadores</h4>
@@ -32,7 +39,29 @@
             {% endfor %}
             </tbody>  
         </table>
+
+        <div class="pagination justify-content-center">
+            <span class="step-links">
+                {% if jogadores.has_previous %}
+                <a href="?pagina_atual=1{% if form.query.value %}&query={{ form.query.value|urlencode }}{% endif %}">&laquo; primeira</a>
+                <a href="?pagina_atual={{ jogadores.previous_page_number }}{% if form.query.value %}&query={{ form.query.value|urlencode }}{% endif %}">anterior</a>
+                {% endif %}
+    
+                <span class="current me-3 ms-3">
+                    Pagina {{ jogadores.number }} de {{ jogadores.paginator.num_pages }}
+                </span>
+    
+                {% if jogadores.has_next %}
+                <a href="?pagina_atual={{ jogadores.next_page_number }}{% if form.query.value  %}&query={{ form.query.value|urlencode }}{% endif %}">proximo</a>
+                <a href="?pagina_atual={{ jogadores.paginator.num_pages }}{% if form.query.value  %}&query={{ form.query.value|urlencode }}{% endif %}">ultima &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+
+
     </div> <!--Fim primeira linha-->
+
+
 
 </div>
 
