@@ -65,8 +65,6 @@ body {
 .match-container{
     background-color: #121212;
     border-radius: 20px !important;
-    margin-right: 24px;
-
 }
 .match-title-container{
     display: flex;
@@ -77,11 +75,15 @@ body {
 
 /*==================== Jogadores ================================*/
 .player-container{
-    background-color: #121212;
+
     border-radius: 20px !important;
 }
 
-
+.player-container div{
+    background-color: #121212;
+    border-radius: 20px !important;
+    padding: 24px;
+}
 
 
 

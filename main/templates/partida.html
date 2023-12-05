@@ -1,0 +1,149 @@
+{% extends  "base.html" %} {% load static %} {% block content %}
+
+<div class="container mt-5 fs-6 mb-4">
+    <div class="container top-container">
+        
+        <div class="team-container time-partida-container ">
+            <div class="logo-container ">
+                <img src="{{partida.time_mandante.escudo}}" alt="{{ partida.time_mandante.nome  }} Escudo" width="130" height="130">
+            </div>
+            <h1 class="ms-4 mt-3"> {{partida.time_mandante.nome}} </h1>
+        </div>
+
+        <div class="resultado-partida-container">    
+            <span>{{ partida.gols_mandante }} : {{ partida.gols_visitante }}</span>
+            <div>
+            {{ partida.data|date:"d/m" }}
+            {{ partida.data|time:"H:i" }}
+            </div>
+        </div>
+
+        <div class="team-container time-partida-container me-4">
+            <div class="logo-container ">
+                <img src="{{ partida.time_visitante.escudo }}" alt="{{ partida.time_visitante.nome }} Escudo" width="130" height="130">
+            </div>
+            <h1 class="ms-4 mt-3">{{partida.time_visitante.nome}}</h1>
+        </div>
+    
+        </div> <!-- fim info time -->
+
+    </div> <!-- fim conteiner top -->
+
+
+    <div class="container mt-4  ">
+
+        <div class="row partida-container-baixo ">
+
+            <div class="col-md-7 container-estatisticas ">
+                <div class="container-estatisticas-header p-3"> 
+                    <div class="logo-container-times ">
+                        <img src="{{partida.time_mandante.escudo}}" alt="{{ partida.time_mandante.nome  }} Escudo" width="50" height="50">
+                    </div>
+                    <h3>Estatisticas dos Times</h3>
+                    <div class="logo-container-times ">
+                        <img src="{{partida.time_visitante.escudo}}" alt="{{ partida.time_visitante.nome  }} Escudo" width="50" height="50">
+                    </div>
+                </div>
+
+                <div class="container-estatisticas-info p-3">
+                    <h5>{{partida.chutes_mandante}} </h5>
+                    <h5>Chutes</h5>
+                    <h5>{{partida.chutes_visitante}} </h5>
+                </div>
+                <div class="container-estatisticas-info p-3">
+                    <h5>{{partida.passes_mandante}} </h5>
+                    <h5>Passes</h5>
+                    <h5>{{partida.passes_visitante}} </h5>
+                </div>
+                <div class="container-estatisticas-info p-3">
+                    <h5>{{partida.faltas_mandante}} </h5>
+                    <h5>Faltas</h5>
+                    <h5>{{partida.faltas_visitante}} </h5>
+                </div>
+                <div class="container-estatisticas-info p-3">
+                    <h5>{{partida.posse_mandante}}% </h5>
+                    <h5>Posse de Bola</h5>
+                    <h5>{{partida.posse_visitante}}% </h5>
+                </div>
+                <div class="container-estatisticas-info p-3">
+                    <h5>{{partida.cartoes_v_mandante}} </h5>
+                    <h5>Cartões Vermelhos</h5>
+                    <h5>{{partida.cartoes_v_visitante}} </h5>
+                </div>
+                <div class="container-estatisticas-info p-3">
+                    <h5>{{partida.cartoes_a_mandante}} </h5>
+                    <h5>Cartões Amarelos</h5>
+                    <h5>{{partida.cartoes_a_visitante}} </h5>
+                </div>
+
+            </div>
+
+
+
+
+            <div class="col-md-5 pe-0">
+                <div class= "container-gols p-4">
+                    <div style="background-color: #121212 !important; border-radius: 20px !important" class="container  table-title-container">
+                        <img class="me-1 ms-1" src={% static "main/images/gol.png" %} alt="Logo" width="35" height="35">
+                        <h4 class ="table-title">Gols</h4>
+                    </div>
+                    
+                    <table class="table table-striped table-hover w-100">
+                        <thead class="text-center">
+                            <tr>
+                            <th scope="col">Gol</th>
+                            <th scope="col">Assitencia</th>
+                            <th scope="col">Minuto</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center" >
+                        {% for gol in gols %}
+                        <tr>
+                            <td class="text-start">                                
+                                <div class="team-logo-container me-3 ms-3">
+                                    <a href="{% url 'jogador_detail' jogador_id=gol.jogador_gol.pk %}">
+                                        <img src="{{ gol.jogador_gol.foto }}" alt="{{ jogador.time.nome }} Escudo" width="30" height="30">
+                                    </a>
+                                </div>
+                                <a href="{% url 'jogador_detail' jogador_id=gol.jogador_gol.pk %}">{{ gol.jogador_gol.apelido }}</a>
+                            </td>
+                            <td><a href="{% url 'jogador_detail' jogador_id=gol.jogador_ass.pk %}">{{ gol.jogador_ass.apelido }}</a></td>
+                            <td>{{gol.minuto}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>  
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

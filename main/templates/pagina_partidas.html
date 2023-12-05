@@ -1,0 +1,52 @@
+{% extends  "base.html" %} {% load static %} {% block content %}
+<div class="container mt-5 fs-6 mb-5">
+            <div style="margin: 0px !important; border-radius: 20px; background-color: #121212; " class="w-100">
+                <div style="background-color: #121212 !important; margin: 0px !important; width: 100% !important; border-top-left-radius: 20px;  border-top-right-radius: 20px;" class="container  table-title-container">
+                    <img class="me-1 ms-1" src={% static "main/images/recentes.png" %} alt="Logo" width="35" height="35">
+                    <h4 class ="table-title">Partidas</h4>
+                </div>
+                {% for partida in partidas %}
+                <div class="latest-match-list-item mb-3 w-100">
+                    <!-- Data e Hora -->
+                    <div style="font-size: 15px;" class="date-div"> 
+                        <div>{{ partida.data|time:"H:i" }}</div>
+                        <div>{{ partida.data|date:"d/m" }}</div>
+                    </div>
+                
+                    <div style="display: flex; justify-content: center; align-items: center; font-size: 25px;">
+                        <!-- Time Mandante -->
+                        <div style="width: 170px; text-align: right; font-size: 15px; display: flex; align-items: center; justify-content: flex-end;">
+                            {{ partida.time_mandante.nome }}
+                            <div class="team-logo-container me-3 ms-3">
+                                <a href="{% url 'time_detail' nome_time=partida.time_mandante.nome %}">
+                                    <img src="{{ partida.time_mandante.escudo }}" alt="{{ partida.time_mandante.nome }} Escudo" width="30" height="30">
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Placar -->
+                        <div style="flex: 0; font-size: 20px; white-space: nowrap;">
+                            {{partida.gols_mandante}} : {{partida.gols_visitante}}
+                        </div>
+                        
+                        <!-- Time Visitante -->
+                        <div style="width: 170px; text-align: left; font-size: 15px; display: flex; align-items: center;">
+                            <div class="team-logo-container ms-3 me-3">
+                                <a href="{% url 'time_detail' nome_time=partida.time_visitante.nome %}">
+                                    <img src="{{ partida.time_visitante.escudo }}" alt="{{ partida.time_visitante.nome }} Escudo" width="30" height="30">
+                                </a>
+                            </div>
+                            {{ partida.time_visitante.nome }}
+                        </div>
+                    </div>
+                    
+                    <a href="{% url 'partida' partida_id=partida.pk %}" class="btn stat-btn" role="button">
+                        <img src="{% static 'main/images/stats.png' %}" alt="Logo" width="25" height="25">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+    
+</div>
+
+{% endblock %}

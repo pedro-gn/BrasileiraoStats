@@ -4,6 +4,7 @@ from django.db import models
 
 class Time(models.Model):
     nome = models.CharField(max_length=50, primary_key=True)
+    nome_reduzido = models.CharField(max_length=50)
     tecnico = models.CharField(max_length=50)
     vitorias = models.IntegerField()
     derrotas = models.IntegerField()
@@ -41,22 +42,42 @@ class Jogador(models.Model):
     pe = models.CharField(max_length=50)
     data_nascimento = models.DateField()
     altura = models.FloatField()
-    foto = models.CharField(max_length=255, default='main/images/avatarjogador.png')
+    foto = models.CharField(max_length=255, default='/static/main/images/avatarjogador.png')
     
     time = models.ForeignKey(Time, on_delete=models.CASCADE)
 
 class Partida(models.Model):
     time_mandante = models.ForeignKey(Time, related_name="partidas_mandante", on_delete=models.CASCADE)
     time_visitante = models.ForeignKey(Time, related_name="partidas_visitante", on_delete=models.CASCADE)
+    
     gols_mandante= models.IntegerField()
     gols_visitante = models.IntegerField()
+    
+    cartoes_v_mandante = models.IntegerField()
+    cartoes_v_visitante = models.IntegerField()
+    
+    cartoes_a_mandante = models.IntegerField()
+    cartoes_a_visitante = models.IntegerField()
+    
+    posse_mandante = models.IntegerField()
+    posse_visitante = models.IntegerField()
+    
+    faltas_mandante = models.IntegerField()
+    faltas_visitante = models.IntegerField()
+    
+    passes_mandante = models.IntegerField()
+    passes_visitante = models.IntegerField()
+    
+    chutes_mandante = models.IntegerField()
+    chutes_visitante = models.IntegerField()
     
     data = models.DateTimeField()
     rodada =  models.IntegerField()
     
 class Gol(models.Model):
     jogador_gol = models.ForeignKey(Jogador, related_name='gols_feitos', on_delete=models.CASCADE)
-    jogador_ass = models.ForeignKey(Jogador, related_name='assistencias', on_delete=models.CASCADE)
+    jogador_ass = models.ForeignKey(Jogador, related_name='assistencias', on_delete=models.CASCADE, null=True)
+    minuto = models.IntegerField(default=5)
     partida = models.ForeignKey(Partida, on_delete=models.CASCADE)
     
 class Substituicao(models.Model):
@@ -73,7 +94,7 @@ class JogadorPartida(models.Model):
     faltas_cometidas = models.IntegerField(default=0)
     assistencias = models.IntegerField(default=0)
     finalizacoes = models.IntegerField(default=0)
-    passes = models.IntegerField(default=0)
+    passes = models.IntegerField(default=0) 
 
 
     class Meta:

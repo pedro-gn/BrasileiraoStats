@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Time, Jogador, Gol, Partida, Substituicao, JogadorPartida
-from django.db.models import Count, F, ExpressionWrapper, IntegerField, Q, Avg, fields
+from django.db.models import Count, F, ExpressionWrapper, IntegerField, Q, Avg, fields, Sum
 from datetime import date
 from .forms import JogadorSearchForm
 
@@ -22,6 +22,27 @@ def home(request):
     }
 
     return render(request, "home.html", context)
+
+def partidas(request):
+    partidas  = Partida.objects.all()
+    context = {
+        "partidas" : partidas,
+    }
+    return render(request, "pagina_partidas.html", context)
+    
+def partida(request, partida_id):
+    partida = get_object_or_404(Partida, pk=partida_id)
+    
+    gols = Gol.objects.filter(partida_id=partida_id)
+    
+    
+    context = {
+        "gols" : gols,
+        "partida" : partida,
+        "time_mandante" : partida.time_mandante,
+        "time_visitante" : partida.time_visitante
+    }
+    return render(request, "partida.html", context)
 
 def jogadores(request):
     todos_jogadores = Jogador.objects.all()
@@ -122,7 +143,17 @@ def jogador_detail(request, jogador_id):
     #ultimas partidas do jogador
     ultimas_partidas = JogadorPartida.objects.select_related('partida__time_mandante', 'partida__time_visitante').filter(jogador=jogador.pk).order_by('-partida__data')[:5]
     
+    
+    total_passes = JogadorPartida.objects.filter(jogador=jogador).aggregate(Sum('passes'))['passes__sum'] or 0
+    total_finalizacoes = JogadorPartida.objects.filter(jogador=jogador).aggregate(Sum('finalizacoes'))['finalizacoes__sum'] or 0
+    total_faltas = JogadorPartida.objects.filter(jogador=jogador).aggregate(Sum('faltas_cometidas'))['faltas_cometidas__sum'] or 0
+    total_assistencias = JogadorPartida.objects.filter(jogador=jogador).aggregate(Sum('assistencias'))['assistencias__sum'] or 0
+    
     context = {
+        "total_faltas" : total_faltas,
+        "total_assistencias" : total_assistencias,
+        "total_finalizacoes" : total_finalizacoes,
+        "total_passes" : total_passes,
         "time" : time,
         "ultimas_partidas" : ultimas_partidas,
         "numero_de_partidas" : numero_de_partidas,

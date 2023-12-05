@@ -5,9 +5,13 @@
     <div class="container top-container">
         <div class="team-container">
             <div class="logo-container ">
-                <img src={% static "main/images/avatarjogador.png" %} alt="{{ jogador.time.nome }} Escudo" width="130" height="130">
+                <img src="{{jogador.foto}}" alt="{{ jogador.time.nome }} Escudo" width="130" height="130">
             </div>
-            <h1 class="ms-4">{{jogador.nome}}</h1>
+            <div class=""  >
+                <h1 class="ms-4">{{jogador.apelido}}</h1>
+                <h5 style="color: #A7A7A7;"class="ms-4">{{jogador.nome}}</h5>
+                <img class ="ms-3 mt-3" src={{ jogador.time.escudo }} alt="{{ jogador.time.nome }} Escudo" width="50" height="50">
+            </div>
         </div>
 
         <div class="grid-container">
@@ -50,7 +54,7 @@
             <div class="info-element">
                 <p class="info-label">Clube</p>
                 <div class="info-value">
-                    {{jogador.time.nome }} <img src={{ jogador.time.escudo }} alt="{{ jogador.time.nome }} Escudo" width="20" height="20">
+                    {{jogador.time.nome }}
                 </div>
             </div> 
         </div> <!-- fim info time -->
@@ -142,7 +146,7 @@
                                 <img class="icon" src={% static "main/images/chute.png" %} alt="Chute">
                                 <div class="label-box">
                                     <div class="label">Finalizações:</div>
-                                    <div class="number">8</div>
+                                    <div class="number">{{total_finalizacoes}}</div>
                                 </div>
                             </div>
                         </div>
@@ -151,7 +155,7 @@
                                 <img class="icon" src={% static "main/images/apito.png" %} alt="Apito">
                                 <div class="label-box">
                                     <div class="label">Faltas:</div>
-                                    <div class="number">2</div>
+                                    <div class="number">{{total_faltas}}</div>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +164,7 @@
                                 <img class="icon" src={% static "main/images/passe.png" %} alt="Passe">
                                 <div class="label-box">
                                     <div class="label">Passes: </div>
-                                    <div class="number">15</div>
+                                    <div class="number">{{total_passes}}</div>
                                 </div>
                             </div>
                         </div>
@@ -169,7 +173,7 @@
                                 <img class="icon" src={% static "main/images/bola.png" %} alt="Bola">
                                 <div class="label-box">
                                     <div class="label">Assistência:</div>
-                                    <div class="number">12</div>
+                                    <div class="number">{{total_assistencias}}</div>
                                 </div>
                             </div>
                         </div>

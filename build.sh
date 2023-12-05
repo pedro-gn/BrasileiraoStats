@@ -12,3 +12,5 @@ if [[ $CREATE_SUPERUSER ]];
 then
   python manage.py createsuperuser --no-input
 fi
+
+python manage.py shell < scripts/import_teams.py

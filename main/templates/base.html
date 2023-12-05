@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/home.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/time.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/partida.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/jogador.css' %}">
 
     <!--   BOOTSTRAP CSS  -->
@@ -51,18 +52,9 @@
                     <a class="nav-link" href="/jogadores">Jogadores</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Partidas</a>
+                    <a class="nav-link" href="/partidas">Partidas</a>
                 </li>
-                <li class="nav-item dropdown custom-dropdown ">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ campeonato_selecionado|default:"Campeonatos" }}
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item {% if campeonato_selecionado == 'Brasileirão 2023' %}active{% endif %}" href="#">Brasileirão 2023</a></li>
-                        <li><a class="dropdown-item {% if campeonato_selecionado == 'Brasileirão 2022' %}active{% endif %}" href="#">Brasileirão 2022</a></li>
-                        <li><a class="dropdown-item {% if campeonato_selecionado == 'Brasileirão 2021' %}active{% endif %}" href="#">Brasileirão 2021</a></li>
-                    </ul>
-                </li>
+                
             </ul>
         </div>
     </div>

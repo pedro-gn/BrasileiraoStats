@@ -1,0 +1,10 @@
+time_mandante, time_visitante, gols_mandante, gols_visitante, cartoes_v_mandante, cartoes_v_visitante, cartoes_a_mandante, cartoes_a_visitante, posse_mandante, posse_visitante, faltas_mandante, faltas_visitante, passes_mandante, passes_visitante, chutes_mandante, chutes_visitante, data, rodada
+Cruzeiro Saf-MG, Atlético Mineiro-MG, 0, 1, 0, 0, 6, 5, 65.3, 34.7, 19, 21, 445, 249, 19, 7, 2023-06-03, 9
+Flamengo-RJ, Atlético Mineiro-MG, 0, 3, 0, 0, 3, 2, 58.3, 41.7, 12, 12, 554, 421, 19, 11, 2023-11-29, 36
+Atlético Mineiro-MG, São Paulo-SP, 2, 1, 0, 0, 4, 1, 48.0, 52.0, 15, 9, 401, 435, 7, 16, 2023-12-02, 37
+Botafogo-SP, Internacional-RS, 3, 1, 0, 0, 3, 3, 50.4, 49.6, 15, 10, 481, 482, 18, 10, 2023-08-12, 19
+Cruzeiro Saf-MG, Botafogo-SP, 0, 0, 0, 0, 1, 2, 67.4, 32.6, 17, 7, 563, 279, 13, 2, 2023-08-06, 18
+São Paulo-SP, Botafogo-SP, 0, 0, 0, 0, 4, 2, 63.8, 36.2, 12, 9, 564, 319, 13, 12, 2023-08-19, 20
+Atlético Mineiro-MG, Flamengo-RJ, 1, 2, 0, 3, 5, 39.0, 61.0, 21, 14, 356, 580, 20, 6, 29-07-2023, 17
+Flamengo-RJ, Palmeiras-SP, 3, 0, 0, 1, 1, 1, 52.0, 48.0, 13, 17, 512, 467, 12, 12, 08-11-2023, 33
+Cruzeiro Saf-MG, Flamengo-RJ, 0, 2, 0, 3, 2, 0, 43.0, 57.0, 20, 11, 370, 513, 12, 9, 19-10-23, 27
