@@ -114,7 +114,9 @@
                         </div>
                     </div>
                     
-                    <button style="" type="button" class="btn stat-btn"><img class="" src={% static "main/images/stats.png" %} alt="Logo" width="25" height="25"></button>
+                    <a href="{% url 'partida' partida_id=partida.partida.pk %}" class="btn stat-btn" role="button">
+                        <img src="{% static 'main/images/stats.png' %}" alt="Logo" width="25" height="25">
+                    </a>
                 </div>
                 {% endfor %}
             </div> <!-- Final primeira coluna-->
