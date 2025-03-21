@@ -9,6 +9,7 @@ BrasileiraoStats é um sistema completo com estatisticas do Campeonato Brasileir
 - CRUD de todas entidades
 - Visualização de estatisticas
 - Responsividade
+- Paginação e Pesquisa
 
 
 ## Screenshots
